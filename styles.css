@@ -2,10 +2,11 @@ p {
   font-weight: bold;
 }
 
-* {
+body {
   outline: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  flex: 1;
 }
