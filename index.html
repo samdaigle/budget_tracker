@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="header">Budget Tracker</div>
-    <div class="balance">
-      <div class="summary"></div>
-      <div class="totalBalance">Total Balance:</div>
-      <div class="income">Income:</div>
-      <div class="expenses">Expenses:</div>
+    <div class="header">BUDGET TRACKER</div>
+    <div class="summary-container">
+      <div class="summary-title">Summary</div>
+      <div class="total-container">
+        <div class="total-title">Total Balance:</div>
+        <div class="total-display">$200.00</div>
+      </div>
+      <div class="income-title">Income:</div>
+      <div class="expenses-title">Expenses:</div>
+
+      <div class="income-display">$300.00</div>
+      <div class="expenses-display">$-100.00</div>
     </div>
-    <div class="form">Add New Item</div>
+    <div class="add-button-container">
+      <button class="newItem">Add New Item</button>
+    </div>
     <div class="recent">Recent Transactions</div>
 
     <script src="main.js"></script>
