@@ -25,7 +25,13 @@ body {
   font-weight: 900;
 }
 
-.total-container {
+.total-container,
+.income-container,
+.expenses-container {
   display: flex;
   justify-content: space-between;
+}
+
+.new-item {
+  padding: 10px 100px;
 }
