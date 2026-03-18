@@ -14,24 +14,27 @@ body {
   padding: 20px;
 }
 
-.summary-container {
-  outline: 1px solid black;
+.summary-container,
+.recent-container {
   width: 500px;
   padding: 20px;
 }
 
-.summary-title {
+.summary-title,
+.recent-title {
   padding-bottom: 15px;
   font-weight: 900;
 }
 
 .total-container,
 .income-container,
-.expenses-container {
+.expenses-container,
+.transaction-container {
   display: flex;
   justify-content: space-between;
 }
 
 .new-item {
   padding: 10px 100px;
+  margin: 10px;
 }

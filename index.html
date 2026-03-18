@@ -25,6 +25,22 @@
     </div>
 
     <button class="new-item">Add New Item</button>
+
+    <div class="add-item-box">
+      <div class="add-item-title">Add New Item</div>
+      <input type="radio" id="income-button" />
+      <label for="income-button">Income</label>
+      <input type="radio" id="expense-button" />
+      <label for="income-button">Expense</label>
+      <label for="amount">Amount</label>
+      <input type="text" id="amount" />
+
+      <select name="categories" id="category-select">
+        <option value="">--Please choose an option--</option>
+      </select>
+      <button>submit</button>
+    </div>
+
     <div class="recent-container">
       <div class="recent-title">Recent Transactions</div>
       <div class="transaction-container">
@@ -34,6 +50,9 @@
         <div class="delete-transaction">[Delete]</div>
       </div>
     </div>
+    <dialog>
+      <h2>hello</h2>
+    </dialog>
 
     <script src="main.js"></script>
   </body>
