@@ -11,7 +11,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
   font-weight: 900;
-  padding: 20px;
+  padding: 10px;
 }
 
 .summary,
@@ -20,13 +20,13 @@ body {
   padding: 20px;
 }
 
-.summary-title,
-.recent-title {
+.summary__title,
+.transactions__title {
   padding-bottom: 15px;
   font-weight: 900;
 }
 
-.total-container,
+.summary__item,
 .income-container,
 .expenses-container,
 .transaction-container,

@@ -7,21 +7,19 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-header">BUDGET TRACKER</div>
+    <h1 class="app-header">BUDGET TRACKER</h1>
     <div class="summary">
       <h2 class="summary__title">Summary</h2>
       <div class="summary__item summary__item--balance">
-
-      <span class="summary__label">Total Balance</span>
-      <span class="summary__value">$200.00</span>
-
-      <div class="income-container">
-        <div class="income-title">Income:</div>
-        <div class="total-display">$300.00</div>
+        <span class="summary__label">Total Balance</span>
+        <span class="summary__value">$200.00</span>
+      <div class="summary__item summary__item--income">
+        <span class="summary__label">Income:</span>
+        <span class="summary__value">$300.00</span>
       </div>
-      <div class="expenses-container">
-        <div class="expenses-title">Expenses:</div>
-        <div class="expenses-display">$-100.00</div>
+      <div class="summary__item summary__item--expense">
+        <span class="summary__label">Expenses:</span>
+        <span class="summary__value">$-100.00</span>
       </div>
     </div>
 
@@ -33,15 +31,15 @@
         <input type="radio" id="income-button" />
         <label for="income-button">Income</label>
       </div>
-      <div class="expense">
+      <div class="form__group">
         <input type="radio" id="expense-button" />
         <label for="income-button">Expense</label>
       </div>
-      <div class="amount">
+      <div class="form__group">
         <label for="amount">Amount:</label>
         <input type="text" id="amount" />
       </div>
-      <div class="categories">
+      <div class="form__group">
         <label for="categories">Category:</label>
         <select name="categories" id="category-select">
           <option value="">--Please choose an option--</option>
@@ -50,19 +48,15 @@
       <button>submit</button>
     </div>
 
-    <div class="recent-container">
-      <div class="recent-title">Recent Transactions</div>
-      <div class="transaction-container">
-        <div class="transaction">Groceries</div>
-        <div class="transaction">-$200</div>
-        <div class="transaction">Food</div>
-        <div class="delete-transaction">[Delete]</div>
+    <div class="transactions">
+      <h2 class="transactions__title">Recent Transactions</h2>
+      <div class="transaction">
+        <span class="transaction__name">Groceries</span>
+        <span class="transaction__amount">-$200</span>
+        <span class="transaction__category">Food</span>
+        <button class="transaction__delete">Delete</button>
       </div>
     </div>
-    <dialog>
-      <h2>hello</h2>
-    </dialog>
-
     <script src="main.js"></script>
   </body>
 </html>
