@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="header">BUDGET TRACKER</div>
-    <div class="summary-container">
-      <div class="summary-title">Summary</div>
-      <div class="total-container">
-        <div class="total-title">Total Balance:</div>
-        <div class="total-display">$200.00</div>
-      </div>
+    <div class="app-header">BUDGET TRACKER</div>
+    <div class="summary">
+      <h2 class="summary__title">Summary</h2>
+      <div class="summary__item summary__item--balance">
+
+      <span class="summary__label">Total Balance</span>
+      <span class="summary__value">$200.00</span>
+
       <div class="income-container">
         <div class="income-title">Income:</div>
         <div class="total-display">$300.00</div>
@@ -24,11 +25,11 @@
       </div>
     </div>
 
-    <button class="new-item">Add New Item</button>
+    <button class="btn btn--primary">Add New Item</button>
 
-    <div class="add-item-box">
-      <div class="add-item-title">Add New Item</div>
-      <div class="income">
+    <div class="form">
+      <div class="form__title">Add New Item</div>
+      <div class="form__group">
         <input type="radio" id="income-button" />
         <label for="income-button">Income</label>
       </div>
