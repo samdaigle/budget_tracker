@@ -1,5 +1,4 @@
 body {
-  outline: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,8 +14,28 @@ body {
   padding: 10px 0px;
 }
 
-.summary__item {
+.summary__item,
+.transaction {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px;
+}
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.form__title {
+  width: 500px;
+}
+.form__group {
+  width: 230px;
+}
+
+.btn {
+  width: 300px;
+  padding: 10px;
 }
