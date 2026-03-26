@@ -28,16 +28,24 @@
 
     <div class="add-item-box">
       <div class="add-item-title">Add New Item</div>
-      <input type="radio" id="income-button" />
-      <label for="income-button">Income</label>
-      <input type="radio" id="expense-button" />
-      <label for="income-button">Expense</label>
-      <label for="amount">Amount</label>
-      <input type="text" id="amount" />
-
-      <select name="categories" id="category-select">
-        <option value="">--Please choose an option--</option>
-      </select>
+      <div class="income">
+        <input type="radio" id="income-button" />
+        <label for="income-button">Income</label>
+      </div>
+      <div class="expense">
+        <input type="radio" id="expense-button" />
+        <label for="income-button">Expense</label>
+      </div>
+      <div class="amount">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" />
+      </div>
+      <div class="categories">
+        <label for="categories">Category:</label>
+        <select name="categories" id="category-select">
+          <option value="">--Please choose an option--</option>
+        </select>
+      </div>
       <button>submit</button>
     </div>
 

@@ -29,7 +29,8 @@ body {
 .total-container,
 .income-container,
 .expenses-container,
-.transaction-container {
+.transaction-container,
+.add-item-box {
   display: flex;
   justify-content: space-between;
 }
@@ -37,4 +38,9 @@ body {
 .new-item {
   padding: 10px 100px;
   margin: 10px;
+}
+
+.add-item-box {
+  flex-direction: column;
+  width: 300px;
 }
