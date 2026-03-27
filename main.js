@@ -73,6 +73,13 @@ function clearForm() {
 }
 
 submitBtn.addEventListener("click", () => {
+  addNewTransaction(
+    designation.value,
+    amount.value,
+    category[category.selectedIndex].textContent,
+  );
+  getTransactionValues();
+  updateSummary();
   clearForm();
 });
 
