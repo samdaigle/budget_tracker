@@ -12,7 +12,7 @@ const incomeBtn = document.querySelector("#income-button");
 const expenseBtn = document.querySelector("#expense-button");
 const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
-const submitForm = document.querySelector(".btn--form");
+const submitBtn = document.querySelector(".btn--form");
 const transactions = document.querySelector(".transactions");
 
 function addTransactionElement(content, className) {
@@ -50,3 +50,22 @@ function addNewTransaction(name, amount, category) {
 }
 
 addNewTransaction("Starbucks", "5.67", "Coffee");
+
+incomeBtn.addEventListener("click", () => {
+  expenseBtn.checked = false;
+});
+
+expenseBtn.addEventListener("click", () => {
+  incomeBtn.checked = false;
+});
+
+function clearForm() {
+  incomeBtn.checked = false;
+  expenseBtn.checked = false;
+  amount.value = "";
+  category.selectedIndex = 0;
+}
+
+submitBtn.addEventListener("click", () => {
+  clearForm();
+});
