@@ -73,7 +73,7 @@ function clearForm() {
 submitBtn.addEventListener("click", () => {
   addNewTransaction(
     designation.value,
-    `$${amount.value}.00`,
+    `$${amount.value}`,
     category[category.selectedIndex].textContent,
   );
   getTransactionValues();
@@ -81,8 +81,8 @@ submitBtn.addEventListener("click", () => {
   clearForm();
 });
 
-function updateSummaryItem(value, type) {
-  type.textContent = `$${value}.00`;
+function updateSummaryItem(value, element) {
+  element.textContent = `$${value.toFixed(2)}`;
 }
 
 function updateSummary() {
