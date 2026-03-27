@@ -15,23 +15,30 @@ const category = document.querySelector("#category-select");
 const submitForm = document.querySelector(".btn--form");
 const transactions = document.querySelector(".transactions");
 
+function addTransactionElement(content, className) {
+  const transactionElement = document.createElement("span");
+  transactionElement.textContent = content;
+  transactionElement.classList.add(className);
+  return transactionElement;
+}
+
 function addNewTransaction(name, amount, category) {
   const newTransaction = document.createElement("div");
   newTransaction.classList.add("transaction");
 
-  const transactionName = document.createElement("span");
-  transactionName.textContent = name;
-  transactionName.classList.add("transaction__name");
+  const transactionName = addTransactionElement(name, "transaction__name");
   newTransaction.appendChild(transactionName);
 
-  const transactionAmount = document.createElement("span");
-  transactionAmount.textContent = amount;
-  transactionAmount.classList.add("transaction__amount");
+  const transactionAmount = addTransactionElement(
+    amount,
+    "transaction__amount",
+  );
   newTransaction.appendChild(transactionAmount);
 
-  const transactionCategory = document.createElement("span");
-  transactionCategory.textContent = category;
-  transactionCategory.classList.add("transaction__category");
+  const transactionCategory = addTransactionElement(
+    category,
+    "transaction__category",
+  );
   newTransaction.appendChild(transactionCategory);
 
   const deleteBtn = document.createElement("button");
@@ -42,4 +49,4 @@ function addNewTransaction(name, amount, category) {
   transactions.appendChild(newTransaction);
 }
 
-addNewTransaction("test", "test", "test");
+addNewTransaction("Starbucks", "5.67", "Coffee");
