@@ -54,8 +54,6 @@ function addNewTransaction(name, amount, category) {
   transactions.appendChild(newTransaction);
 }
 
-addNewTransaction("Starbucks", "5.67", "Coffee");
-
 incomeBtn.addEventListener("click", () => {
   expenseBtn.checked = false;
 });
@@ -100,4 +98,6 @@ function getTransactionValues() {
   } else {
     expenseValue += +amount.value;
   }
+
+  balanceValue = incomeValue - expenseValue;
 }
