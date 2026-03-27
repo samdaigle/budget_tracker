@@ -54,14 +54,6 @@ function addNewTransaction(name, amount, category) {
   transactions.appendChild(newTransaction);
 }
 
-incomeBtn.addEventListener("click", () => {
-  expenseBtn.checked = false;
-});
-
-expenseBtn.addEventListener("click", () => {
-  incomeBtn.checked = false;
-});
-
 function clearForm() {
   incomeBtn.checked = false;
   expenseBtn.checked = false;
