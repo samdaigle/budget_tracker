@@ -25,6 +25,11 @@ body {
   align-items: center;
   padding-bottom: 10px;
 }
+
+.transaction__item {
+  width: 30px;
+}
+
 .form {
   display: flex;
   flex-wrap: wrap;

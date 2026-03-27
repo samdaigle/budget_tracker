@@ -3,7 +3,7 @@ let expenseValue = 0;
 let balanceValue = 0;
 
 const income = document.querySelector(
-  ".summary__item--balance > .summary__value",
+  ".summary__item--income > .summary__value",
 );
 const expenses = document.querySelector(
   ".summary__item--expense > .summary__value",
@@ -23,7 +23,7 @@ const transactions = document.querySelector(".transactions");
 function addTransactionElement(content, className) {
   const transactionElement = document.createElement("span");
   transactionElement.textContent = content;
-  transactionElement.classList.add(className);
+  transactionElement.classList.add("transaction__item", className);
   return transactionElement;
 }
 
@@ -75,7 +75,7 @@ function clearForm() {
 submitBtn.addEventListener("click", () => {
   addNewTransaction(
     designation.value,
-    amount.value,
+    `$${amount.value}.00`,
     category[category.selectedIndex].textContent,
   );
   getTransactionValues();
@@ -83,14 +83,15 @@ submitBtn.addEventListener("click", () => {
   clearForm();
 });
 
-function updateSummaryValue(value, type) {
-  type.textContent = `${value}`;
+function updateSummaryItem(value, type) {
+  type.textContent = `$${value}.00`;
 }
 
 function updateSummary() {
-  updateSummaryValue(balanceValue, balance);
-  updateSummaryValue(incomeValue, income);
-  updateSummaryValue(expenseValue, expenses);
+  updateSummaryItem(balanceValue, balance);
+  updateSummaryItem(incomeValue, income);
+  updateSummaryItem(expenseValue, expenses);
+  console.log(incomeValue);
 }
 
 function getTransactionValues() {
