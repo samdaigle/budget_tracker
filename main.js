@@ -1,3 +1,7 @@
+let incomeValue = 0;
+let expenseValue = 0;
+let balanceValue = 0;
+
 const income = document.querySelector(
   ".summary__item--balance > .summary__value",
 );
@@ -12,6 +16,7 @@ const incomeBtn = document.querySelector("#income-button");
 const expenseBtn = document.querySelector("#expense-button");
 const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
+const designation = document.querySelector("#designation");
 const submitBtn = document.querySelector(".btn--form");
 const transactions = document.querySelector(".transactions");
 
@@ -63,9 +68,28 @@ function clearForm() {
   incomeBtn.checked = false;
   expenseBtn.checked = false;
   amount.value = "";
+  designation.value = "";
   category.selectedIndex = 0;
 }
 
 submitBtn.addEventListener("click", () => {
   clearForm();
 });
+
+function updateSummaryValue(value, type) {
+  type.textContent = `${value}`;
+}
+
+function updateSummary() {
+  updateSummaryValue(balanceValue, balance);
+  updateSummaryValue(incomeValue, income);
+  updateSummaryValue(expenseValue, expenses);
+}
+
+function getTransactionValues() {
+  if (incomeBtn.checked) {
+    incomeValue += +amount.value;
+  } else {
+    expenseValue += +amount.value;
+  }
+}
