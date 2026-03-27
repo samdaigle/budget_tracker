@@ -10,3 +10,10 @@ const balance = document.querySelector(
 );
 
 const addTransactionBtn = document.querySelector(".btn--primary");
+
+const incomeBtn = document.querySelector("#income-button");
+const expenseBtn = document.querySelector("#expense-button");
+const amount = document.querySelector("#amount");
+const category = document.querySelector("#category-select");
+
+const submitForm = document.querySelector(".btn--form");
