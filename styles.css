@@ -53,3 +53,7 @@ body {
 .btn:hover {
   cursor: pointer;
 }
+
+.form__hidden {
+  display: none;
+}

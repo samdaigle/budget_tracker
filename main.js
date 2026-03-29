@@ -19,6 +19,7 @@ const category = document.querySelector("#category-select");
 const designation = document.querySelector("#designation");
 const submitBtn = document.querySelector(".btn--form");
 const transactions = document.querySelector(".transactions");
+const form = document.querySelector(".form");
 
 function addTransactionElement(content, className) {
   const transactionElement = document.createElement("span");
@@ -78,6 +79,11 @@ submitBtn.addEventListener("click", () => {
   getTransactionValues();
   updateSummary();
   clearForm();
+  form.classList.add("form__hidden");
+});
+
+addTransactionBtn.addEventListener("click", () => {
+  form.classList.remove("form__hidden");
 });
 
 function updateSummaryItem(value, element) {
