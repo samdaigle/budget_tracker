@@ -66,9 +66,13 @@ function clearForm() {
 }
 
 submitBtn.addEventListener("click", () => {
+  if (!checkAmountValidity(amount.value)) {
+    return;
+  }
+  const amountValue = +amount.value;
   addNewTransaction(
     designation.value,
-    `$${amount.value}`,
+    `$${amountValue.toFixed(2)}`,
     category[category.selectedIndex].textContent,
   );
   getTransactionValues();
@@ -94,4 +98,13 @@ function getTransactionValues() {
   }
 
   balanceValue = incomeValue - expenseValue;
+}
+
+function checkAmountValidity(value) {
+  if (value.trim() === "" || isNaN(value)) {
+    alert("Please enter a valid number");
+    return false;
+  } else {
+    return true;
+  }
 }
