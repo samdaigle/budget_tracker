@@ -49,6 +49,9 @@ function addNewTransaction(name, amount, category) {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
+  deleteBtn.addEventListener("click", () => {
+    newTransaction.remove();
+  });
   newTransaction.appendChild(deleteBtn);
 
   transactions.appendChild(newTransaction);
@@ -81,7 +84,6 @@ function updateSummary() {
   updateSummaryItem(balanceValue, balance);
   updateSummaryItem(incomeValue, income);
   updateSummaryItem(expenseValue, expenses);
-  console.log(incomeValue);
 }
 
 function getTransactionValues() {
