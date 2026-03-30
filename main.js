@@ -89,8 +89,8 @@ submitBtn.addEventListener("click", () => {
     newTransaction.category,
     newTransaction.id,
   );
-  updateSummaryValues();
-  updateSummaryDisplay();
+  const summaryValues = updateSummaryValues();
+  updateSummaryDisplay(summaryValues);
   clearForm();
   form.classList.add("form__hidden");
 });
@@ -99,7 +99,7 @@ addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
 
-function getSummaryValues(a, b) {
+function accumulateSummary(a, b) {
   if (b.type == "income") {
     a.income += b.amount;
   } else if (b.type == "expense") {
@@ -109,7 +109,7 @@ function getSummaryValues(a, b) {
 }
 
 function updateSummaryValues() {
-  const summaryValues = transactions.reduce((a, b) => getSummaryValues(a, b), {
+  const summaryValues = transactions.reduce((a, b) => accumulateSummary(a, b), {
     income: 0,
     expenses: 0,
     balance: 0,
@@ -118,11 +118,10 @@ function updateSummaryValues() {
   return summaryValues;
 }
 
-function updateSummaryDisplay() {
-  const summaryValues = updateSummaryValues();
-  income.textContent = `$${summaryValues.income.toFixed(2)}`;
-  expenses.textContent = `$${summaryValues.expenses.toFixed(2)}`;
-  balance.textContent = `$${summaryValues.balance.toFixed(2)}`;
+function updateSummaryDisplay(values) {
+  income.textContent = `$${values.income.toFixed(2)}`;
+  expenses.textContent = `$${values.expenses.toFixed(2)}`;
+  balance.textContent = `$${values.balance.toFixed(2)}`;
 }
 
 function checkTypeValidity() {
