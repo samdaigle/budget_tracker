@@ -85,13 +85,13 @@ submitBtn.addEventListener("click", () => {
     category: category.options[category.selectedIndex].text,
   };
   transactions.push(newTransaction);
-  console.log(transactions);
   addNewTransaction(
     newTransaction["name"],
     `$${newTransaction["amount"].toFixed(2)}`,
     newTransaction["category"],
   );
-  updateSummary();
+  updateSummaryValues();
+  updateSummaryDisplay();
   clearForm();
   form.classList.add("form__hidden");
 });
@@ -100,14 +100,30 @@ addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
 
-function updateSummaryItem(value, element) {
-  element.textContent = `$${value.toFixed(2)}`;
+function getIncomeTotal(a, b) {
+  if (b.type == "income") {
+    a += b.amount;
+  }
+  return a;
 }
 
-function updateSummary() {
-  updateSummaryItem(balanceValue, balance);
-  updateSummaryItem(incomeValue, income);
-  updateSummaryItem(expenseValue, expenses);
+function getExpenseTotal(a, b) {
+  if (b.type == "expense") {
+    a += b.amount;
+  }
+  return a;
+}
+
+function updateSummaryValues() {
+  incomeValue = transactions.reduce((a, b) => getIncomeTotal(a, b), 0);
+  expenseValue = transactions.reduce((a, b) => getExpenseTotal(a, b), 0);
+  balanceValue = incomeValue - expenseValue;
+}
+
+function updateSummaryDisplay() {
+  income.textContent = `$${incomeValue.toFixed(2)}`;
+  expenses.textContent = `$${expenseValue.toFixed(2)}`;
+  balance.textContent = `$${balanceValue.toFixed(2)}`;
 }
 
 function checkTypeValidity() {
