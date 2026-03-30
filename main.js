@@ -16,6 +16,7 @@ const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
 const designation = document.querySelector("#designation");
 const submitBtn = document.querySelector(".btn--form");
+const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
 
@@ -95,6 +96,11 @@ submitBtn.addEventListener("click", () => {
   );
   const summaryValues = buildSummaryObject();
   updateSummaryDisplay(summaryValues);
+  clearForm();
+  form.classList.add("form__hidden");
+});
+
+cancelBtn.addEventListener("click", () => {
   clearForm();
   form.classList.add("form__hidden");
 });
