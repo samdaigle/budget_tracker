@@ -49,7 +49,11 @@ function addNewTransaction(name, amount, category, id) {
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
   deleteBtn.addEventListener("click", () => {
-    newTransaction.remove();
+    let index = transactions.findIndex((value) => value.id == id);
+    console.log(index);
+    transactions.splice(index, index + 1);
+    let values = updateSummaryValues();
+    updateSummaryDisplay(values);
   });
   newTransaction.appendChild(deleteBtn);
   newTransaction.setAttribute("id", `${id}`);
