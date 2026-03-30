@@ -49,14 +49,14 @@ function addNewTransaction(name, amount, category, id) {
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
   deleteBtn.addEventListener("click", () => {
-    let index = transactions.findIndex((value) => value.id == id);
-    console.log(index);
-    transactions.splice(index, index + 1);
-    let values = updateSummaryValues();
+    let index = transactions.findIndex((value) => value.id === id);
+    transactions.splice(index, 1);
+    let values = buildSummaryObject();
     updateSummaryDisplay(values);
+    newTransaction.remove();
   });
   newTransaction.appendChild(deleteBtn);
-  newTransaction.setAttribute("id", `${id}`);
+  newTransaction.setAttribute("id", id);
 
   transactionsDisplay.appendChild(newTransaction);
 }
@@ -93,7 +93,7 @@ submitBtn.addEventListener("click", () => {
     newTransaction.category,
     newTransaction.id,
   );
-  const summaryValues = updateSummaryValues();
+  const summaryValues = buildSummaryObject();
   updateSummaryDisplay(summaryValues);
   clearForm();
   form.classList.add("form__hidden");
@@ -103,21 +103,31 @@ addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
 
-function accumulateSummary(a, b) {
-  if (b.type == "income") {
-    a.income += b.amount;
-  } else if (b.type == "expense") {
-    a.expenses += b.amount;
-  }
-  return a;
-}
+// function accumulateSummary(a, b) {
+//   if (b.type == "income") {
+//     a.income += b.amount;
+//   } else if (b.type == "expense") {
+//     a.expenses += b.amount;
+//   }
+//   return a;
+// }
 
-function updateSummaryValues() {
-  const summaryValues = transactions.reduce((a, b) => accumulateSummary(a, b), {
-    income: 0,
-    expenses: 0,
-    balance: 0,
-  });
+function buildSummaryObject() {
+  const summaryValues = transactions.reduce(
+    (a, b) => {
+      if (b.type === "income") {
+        a.income += b.amount;
+      } else if (b.type === "expense") {
+        a.expenses += b.amount;
+      }
+      return a;
+    },
+    {
+      income: 0,
+      expenses: 0,
+      balance: 0,
+    },
+  );
   summaryValues.balance = summaryValues.income - summaryValues.expenses;
   return summaryValues;
 }
