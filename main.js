@@ -1,6 +1,3 @@
-let incomeValue = 0;
-let expenseValue = 0;
-let balanceValue = 0;
 const transactions = [];
 
 const income = document.querySelector(
@@ -29,7 +26,7 @@ function addTransactionElement(content, className) {
   return transactionElement;
 }
 
-function addNewTransaction(name, amount, category) {
+function addNewTransaction(name, amount, category, id) {
   const newTransaction = document.createElement("div");
   newTransaction.classList.add("transaction");
 
@@ -55,6 +52,7 @@ function addNewTransaction(name, amount, category) {
     newTransaction.remove();
   });
   newTransaction.appendChild(deleteBtn);
+  newTransaction.setAttribute("id", `${id}`);
 
   transactionsDisplay.appendChild(newTransaction);
 }
@@ -86,9 +84,10 @@ submitBtn.addEventListener("click", () => {
   };
   transactions.push(newTransaction);
   addNewTransaction(
-    newTransaction["name"],
-    `$${newTransaction["amount"].toFixed(2)}`,
-    newTransaction["category"],
+    newTransaction.name,
+    `$${newTransaction.amount.toFixed(2)}`,
+    newTransaction.category,
+    newTransaction.id,
   );
   updateSummaryValues();
   updateSummaryDisplay();
@@ -100,30 +99,30 @@ addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
 
-function getIncomeTotal(a, b) {
+function getSummaryValues(a, b) {
   if (b.type == "income") {
-    a += b.amount;
-  }
-  return a;
-}
-
-function getExpenseTotal(a, b) {
-  if (b.type == "expense") {
-    a += b.amount;
+    a.income += b.amount;
+  } else if (b.type == "expense") {
+    a.expenses += b.amount;
   }
   return a;
 }
 
 function updateSummaryValues() {
-  incomeValue = transactions.reduce((a, b) => getIncomeTotal(a, b), 0);
-  expenseValue = transactions.reduce((a, b) => getExpenseTotal(a, b), 0);
-  balanceValue = incomeValue - expenseValue;
+  const summaryValues = transactions.reduce((a, b) => getSummaryValues(a, b), {
+    income: 0,
+    expenses: 0,
+    balance: 0,
+  });
+  summaryValues.balance = summaryValues.income - summaryValues.expenses;
+  return summaryValues;
 }
 
 function updateSummaryDisplay() {
-  income.textContent = `$${incomeValue.toFixed(2)}`;
-  expenses.textContent = `$${expenseValue.toFixed(2)}`;
-  balance.textContent = `$${balanceValue.toFixed(2)}`;
+  const summaryValues = updateSummaryValues();
+  income.textContent = `$${summaryValues.income.toFixed(2)}`;
+  expenses.textContent = `$${summaryValues.expenses.toFixed(2)}`;
+  balance.textContent = `$${summaryValues.balance.toFixed(2)}`;
 }
 
 function checkTypeValidity() {
@@ -154,7 +153,7 @@ function checkNameValidity(value) {
 }
 
 function checkCategoryValidity(value) {
-  if (value.selectedIndex == 0) {
+  if (value.selectedIndex === 0) {
     alert("Please choose a category");
     return false;
   } else {
