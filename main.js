@@ -1,6 +1,7 @@
 let incomeValue = 0;
 let expenseValue = 0;
 let balanceValue = 0;
+const transactions = [];
 
 const income = document.querySelector(
   ".summary__item--income > .summary__value",
@@ -18,7 +19,7 @@ const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
 const designation = document.querySelector("#designation");
 const submitBtn = document.querySelector(".btn--form");
-const transactions = document.querySelector(".transactions");
+const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
 
 function addTransactionElement(content, className) {
@@ -55,7 +56,7 @@ function addNewTransaction(name, amount, category) {
   });
   newTransaction.appendChild(deleteBtn);
 
-  transactions.appendChild(newTransaction);
+  transactionsDisplay.appendChild(newTransaction);
 }
 
 function clearForm() {
@@ -67,16 +68,29 @@ function clearForm() {
 }
 
 submitBtn.addEventListener("click", () => {
-  if (!checkAmountValidity(amount.value)) {
+  if (
+    !checkAmountValidity(amount.value) ||
+    !checkTypeValidity() ||
+    !checkCategoryValidity(category) ||
+    !checkNameValidity(designation.value)
+  ) {
     return;
   }
   const amountValue = +amount.value;
+  const newTransaction = {
+    id: crypto.randomUUID(),
+    name: designation.value,
+    amount: amountValue,
+    type: getTransactionType(),
+    category: category.options[category.selectedIndex].text,
+  };
+  transactions.push(newTransaction);
+  console.log(transactions);
   addNewTransaction(
-    designation.value,
-    `$${amountValue.toFixed(2)}`,
-    category[category.selectedIndex].textContent,
+    newTransaction["name"],
+    `$${newTransaction["amount"].toFixed(2)}`,
+    newTransaction["category"],
   );
-  getTransactionValues();
   updateSummary();
   clearForm();
   form.classList.add("form__hidden");
@@ -96,21 +110,46 @@ function updateSummary() {
   updateSummaryItem(expenseValue, expenses);
 }
 
-function getTransactionValues() {
-  if (incomeBtn.checked) {
-    incomeValue += +amount.value;
+function checkTypeValidity() {
+  if (!incomeBtn.checked && !expenseBtn.checked) {
+    alert("Please choose income or expense.");
+    return false;
   } else {
-    expenseValue += +amount.value;
+    return true;
   }
-
-  balanceValue = incomeValue - expenseValue;
 }
 
 function checkAmountValidity(value) {
   if (value.trim() === "" || isNaN(value)) {
-    alert("Please enter a valid number");
+    alert("Please enter a valid amount.");
     return false;
   } else {
     return true;
+  }
+}
+
+function checkNameValidity(value) {
+  if (value.trim() === "") {
+    alert("Please enter a valid name.");
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function checkCategoryValidity(value) {
+  if (value.selectedIndex == 0) {
+    alert("Please choose a category");
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function getTransactionType() {
+  if (incomeBtn.checked) {
+    return "income";
+  } else if (expenseBtn.checked) {
+    return "expense";
   }
 }
