@@ -49,9 +49,9 @@ function addNewTransaction(name, amount, category, id) {
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
   deleteBtn.addEventListener("click", () => {
-    let index = transactions.findIndex((value) => value.id === id);
+    const index = transactions.findIndex((value) => value.id === id);
     transactions.splice(index, 1);
-    let values = buildSummaryObject();
+    const values = buildSummaryObject();
     updateSummaryDisplay(values);
     newTransaction.remove();
   });
@@ -102,15 +102,6 @@ submitBtn.addEventListener("click", () => {
 addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
-
-// function accumulateSummary(a, b) {
-//   if (b.type == "income") {
-//     a.income += b.amount;
-//   } else if (b.type == "expense") {
-//     a.expenses += b.amount;
-//   }
-//   return a;
-// }
 
 function buildSummaryObject() {
   const summaryValues = transactions.reduce(
