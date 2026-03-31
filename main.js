@@ -47,7 +47,7 @@ function addTransactionElement(content, className) {
   return transactionElement;
 }
 
-function addNewTransaction(name, amount, category, id) {
+function renderTransaction(name, amount, category, id) {
   const newTransaction = document.createElement("div");
   newTransaction.classList.add("transaction");
 
@@ -55,7 +55,7 @@ function addNewTransaction(name, amount, category, id) {
   newTransaction.appendChild(transactionName);
 
   const transactionAmount = addTransactionElement(
-    amount,
+    `$${amount.toFixed(2)}`,
     "transaction__amount",
   );
   newTransaction.appendChild(transactionAmount);
@@ -108,12 +108,7 @@ submitBtn.addEventListener("click", () => {
     category: category.options[category.selectedIndex].text,
   };
   transactions.push(newTransaction);
-  addNewTransaction(
-    newTransaction.name,
-    `$${newTransaction.amount.toFixed(2)}`,
-    newTransaction.category,
-    newTransaction.id,
-  );
+  renderDisplay();
   const summaryValues = buildSummaryObject();
   updateSummaryDisplay(summaryValues);
   clearForm();
@@ -197,4 +192,10 @@ function getTransactionType() {
   } else if (expenseBtn.checked) {
     return "expense";
   }
+}
+
+function renderDisplay() {
+  transactions.forEach((e) => {
+    renderTransaction(e.name, e.amount, e.category, e.id);
+  });
 }
