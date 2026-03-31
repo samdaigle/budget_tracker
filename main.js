@@ -47,7 +47,7 @@ function addTransactionElement(content, className) {
   return transactionElement;
 }
 
-function renderTransaction(name, amount, category, id) {
+function createTransactionElement(name, amount, category, id) {
   const newTransaction = document.createElement("div");
   newTransaction.classList.add("transaction");
 
@@ -72,14 +72,12 @@ function renderTransaction(name, amount, category, id) {
   deleteBtn.addEventListener("click", () => {
     const index = transactions.findIndex((value) => value.id === id);
     transactions.splice(index, 1);
-    const values = buildSummaryObject();
-    updateSummaryDisplay(values);
-    newTransaction.remove();
+    renderDisplay();
   });
   newTransaction.appendChild(deleteBtn);
   newTransaction.setAttribute("id", id);
 
-  transactionsDisplay.appendChild(newTransaction);
+  return newTransaction;
 }
 
 function clearForm() {
@@ -109,8 +107,6 @@ submitBtn.addEventListener("click", () => {
   };
   transactions.push(newTransaction);
   renderDisplay();
-  const summaryValues = buildSummaryObject();
-  updateSummaryDisplay(summaryValues);
   clearForm();
   form.classList.add("form__hidden");
 });
@@ -144,7 +140,8 @@ function buildSummaryObject() {
   return summaryValues;
 }
 
-function updateSummaryDisplay(values) {
+function updateSummaryDisplay() {
+  const values = buildSummaryObject();
   income.textContent = `$${values.income.toFixed(2)}`;
   expenses.textContent = `$${values.expenses.toFixed(2)}`;
   balance.textContent = `$${values.balance.toFixed(2)}`;
@@ -195,7 +192,15 @@ function getTransactionType() {
 }
 
 function renderDisplay() {
+  updateSummaryDisplay();
+  transactionsDisplay.innerHTML = "";
   transactions.forEach((e) => {
-    renderTransaction(e.name, e.amount, e.category, e.id);
+    const transaction = createTransactionElement(
+      e.name,
+      e.amount,
+      e.category,
+      e.id,
+    );
+    transactionsDisplay.appendChild(transaction);
   });
 }
