@@ -1,4 +1,17 @@
 const transactions = [];
+const categories = [
+  "paycheck",
+  "rent",
+  "utilities",
+  "insurance",
+  "gas",
+  "transportation",
+  "groceries",
+  "dining out",
+  "haircut",
+  "clothing",
+  "entertainment",
+];
 
 const income = document.querySelector(
   ".summary__item--income > .summary__value",
@@ -19,6 +32,13 @@ const submitBtn = document.querySelector(".btn--form");
 const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
+
+categories.forEach((e) => {
+  const option = document.createElement("option");
+  option.setAttribute("value", "");
+  option.textContent = e;
+  category.appendChild(option);
+});
 
 function addTransactionElement(content, className) {
   const transactionElement = document.createElement("span");
