@@ -27,7 +27,7 @@ const incomeBtn = document.querySelector("#income-button");
 const expenseBtn = document.querySelector("#expense-button");
 const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
-const designation = document.querySelector("#designation");
+const description = document.querySelector("#designation");
 const submitBtn = document.querySelector("#submit-btn");
 const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
@@ -35,7 +35,7 @@ const form = document.querySelector(".form");
 
 categories.forEach((e) => {
   const option = document.createElement("option");
-  option.setAttribute("value", "");
+  option.setAttribute("value", e);
   option.textContent = e;
   category.appendChild(option);
 });
@@ -94,14 +94,14 @@ form.addEventListener("submit", (e) => {
     !checkAmountValidity(amount.value) ||
     !checkTypeValidity() ||
     !checkCategoryValidity(category) ||
-    !checkNameValidity(designation.value)
+    !checkNameValidity(description.value)
   ) {
     return;
   }
   const amountValue = +amount.value;
   const newTransaction = {
     id: crypto.randomUUID(),
-    name: designation.value,
+    name: description.value,
     amount: amountValue,
     type: getTransactionType(),
     category: category.options[category.selectedIndex].text,

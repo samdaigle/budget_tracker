@@ -45,7 +45,8 @@ body {
   width: 230px;
 }
 
-.btn {
+.btn,
+#submit-btn {
   width: 300px;
   padding: 10px;
 }
@@ -57,4 +58,3 @@ body {
 .form__hidden {
   display: none;
 }
-
