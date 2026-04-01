@@ -26,7 +26,7 @@
 
     <button class="btn btn--primary">Add Transaction</button>
 
-    <div class="form form__hidden">
+    <form class="form form__hidden">
       <h3 class="form__title">Add Transaction</h3>
       <div class="form__group">
         <input type="radio" name="type" id="income-button" />
@@ -38,7 +38,7 @@
       </div>
       <div class="form__group">
         <label for="amount">Amount:</label>
-        <input type="text" id="amount" />
+        <input type="number" id="amount" />
       </div>
       <div class="form__group">
         <label for="categories">Category:</label>
@@ -50,9 +50,9 @@
         <label for="designation">Name:</label>
         <input type="text" id="designation" />
       </div>
-      <button class="btn btn--form">submit</button>
+      <input type="submit" id="submit-btn"></button>
       <button class="btn btn--cancel">Cancel</button>
-    </div>
+    </form>
 
     <h2 class="transactions__title">Recent Transactions</h2>
     <div class="transactions"></div>
