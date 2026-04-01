@@ -48,7 +48,12 @@ function addTransactionElement(content, className) {
   return transactionElement;
 }
 
-function createTransactionElement(name, amount, category, id) {
+function createTransactionElement(object) {
+  const amount = object.amount;
+  const category = object.category;
+  const id = object.id;
+  const name = object.name;
+
   const newTransaction = document.createElement("div");
   newTransaction.classList.add("transaction");
 
@@ -199,12 +204,7 @@ function renderDisplay() {
   updateSummaryDisplay();
   transactionsDisplay.innerHTML = "";
   transactions.forEach((e) => {
-    const transaction = createTransactionElement(
-      e.name,
-      e.amount,
-      e.category,
-      e.id,
-    );
+    const transaction = createTransactionElement(e);
     transactionsDisplay.appendChild(transaction);
   });
 }
