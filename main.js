@@ -70,16 +70,18 @@ function createTransactionElement(name, amount, category, id) {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
-  deleteBtn.addEventListener("click", () => {
-    const index = transactions.findIndex((value) => value.id === id);
-    transactions.splice(index, 1);
-    renderDisplay();
-  });
   newTransaction.appendChild(deleteBtn);
   newTransaction.setAttribute("id", id);
 
   return newTransaction;
 }
+
+transactionsDisplay.addEventListener("click", (e) => {
+  const target = e.target.parentNode;
+  const index = transactions.findIndex((value) => value.id === target.id);
+  transactions.splice(index, 1);
+  renderDisplay();
+});
 
 function clearForm() {
   incomeBtn.checked = false;
