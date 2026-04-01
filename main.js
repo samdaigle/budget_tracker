@@ -28,7 +28,7 @@ const expenseBtn = document.querySelector("#expense-button");
 const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
 const designation = document.querySelector("#designation");
-const submitBtn = document.querySelector(".btn--form");
+const submitBtn = document.querySelector("#submit-btn");
 const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
@@ -88,7 +88,8 @@ function clearForm() {
   category.selectedIndex = 0;
 }
 
-submitBtn.addEventListener("click", () => {
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
   if (
     !checkAmountValidity(amount.value) ||
     !checkTypeValidity() ||
