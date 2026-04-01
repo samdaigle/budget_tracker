@@ -27,11 +27,12 @@ const incomeBtn = document.querySelector("#income-button");
 const expenseBtn = document.querySelector("#expense-button");
 const amount = document.querySelector("#amount");
 const category = document.querySelector("#category-select");
-const description = document.querySelector("#designation");
+const description = document.querySelector("#description");
 const submitBtn = document.querySelector("#submit-btn");
 const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
+const amountError = document.querySelector(".amount-error");
 
 categories.forEach((e) => {
   const option = document.createElement("option");
@@ -84,7 +85,7 @@ function clearForm() {
   incomeBtn.checked = false;
   expenseBtn.checked = false;
   amount.value = "";
-  designation.value = "";
+  description.value = "";
   category.selectedIndex = 0;
 }
 
@@ -159,7 +160,7 @@ function checkTypeValidity() {
 
 function checkAmountValidity(value) {
   if (value.trim() === "" || isNaN(value)) {
-    alert("Please enter a valid amount.");
+    amountError.textContent = "Please enter a valid amount.";
     return false;
   } else {
     return true;

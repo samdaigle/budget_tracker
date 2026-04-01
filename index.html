@@ -31,24 +31,29 @@
       <div class="form__group">
         <input type="radio" name="type" id="income-button" />
         <label for="income-button">Income</label>
+        <span class="error income-error"></span>
       </div>
       <div class="form__group">
         <input type="radio" name="type" id="expense-button" />
         <label for="expense-button">Expense</label>
+        <span class="error expense-error"></span>
       </div>
       <div class="form__group">
         <label for="amount">Amount:</label>
         <input type="number" id="amount" />
+        <span class="error amount-error"></span>
       </div>
       <div class="form__group">
         <label for="categories">Category:</label>
         <select name="categories" id="category-select">
           <option value="">--Please choose an option--</option>
         </select>
+        <span class="error category-error"></span>
       </div>
       <div class="form__group">
         <label for="description">Name:</label>
         <input type="text" id="description" />
+        <span class="error description-error"></span>
       </div>
       <input type="submit" id="submit-btn"></button>
       <button class="btn btn--cancel">Cancel</button>
