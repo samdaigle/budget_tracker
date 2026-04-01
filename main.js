@@ -106,9 +106,9 @@ submitBtn.addEventListener("click", () => {
     category: category.options[category.selectedIndex].text,
   };
   transactions.push(newTransaction);
-  renderDisplay();
   clearForm();
   form.classList.add("form__hidden");
+  renderDisplay();
 });
 
 cancelBtn.addEventListener("click", () => {
