@@ -167,8 +167,10 @@ function checkTypeValidity() {
 
 function checkAmountValidity(value) {
   if (value.trim() === "" || isNaN(value)) {
-    amountError.textContent = "Please enter a valid amount.";
+    amountError.textContent = "Please enter a number.";
     return false;
+  } else if (Number(value) <= 0) {
+    amountError.textContent = "Please enter a positive number.";
   } else {
     return true;
   }
