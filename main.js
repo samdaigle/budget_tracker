@@ -98,14 +98,8 @@ function clearForm() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (
-    !checkAmountValidity(amount.value) ||
-    !checkTypeValidity() ||
-    !checkCategoryValidity(category) ||
-    !checkNameValidity(description.value)
-  ) {
-    return;
-  }
+  const errors = validateForm();
+  displayErrors(errors);
   const amountValue = +amount.value;
   const newTransaction = {
     id: crypto.randomUUID(),
@@ -158,7 +152,6 @@ function updateSummaryDisplay() {
 
 function checkTypeValidity() {
   if (!incomeBtn.checked && !expenseBtn.checked) {
-    alert("Please choose income or expense.");
     return false;
   } else {
     return true;
@@ -166,11 +159,7 @@ function checkTypeValidity() {
 }
 
 function checkAmountValidity(value) {
-  if (value.trim() === "" || isNaN(value)) {
-    amountError.textContent = "Please enter a number.";
-    return false;
-  } else if (Number(value) <= 0) {
-    amountError.textContent = "Please enter a positive number.";
+  if (Number(value) <= 0) {
   } else {
     return true;
   }
@@ -178,7 +167,6 @@ function checkAmountValidity(value) {
 
 function checkNameValidity(value) {
   if (value.trim() === "") {
-    alert("Please enter a valid name.");
     return false;
   } else {
     return true;
@@ -187,11 +175,35 @@ function checkNameValidity(value) {
 
 function checkCategoryValidity(value) {
   if (value.selectedIndex === 0) {
-    alert("Please choose a category");
     return false;
   } else {
     return true;
   }
+}
+
+function validateForm() {
+  const errors = [];
+
+  if (!checkTypeValidity())
+    errors.push({ class: ".type-error", message: "Pick a type." });
+  if (!checkAmountValidity(amount.value))
+    errors.push({
+      class: ".amount-error",
+      message: "Enter a positive number.",
+    });
+  if (!checkCategoryValidity(category))
+    errors.push({ class: ".category-error", message: "Pick a category." });
+  if (!checkNameValidity(description.value))
+    errors.push({ class: ".name-error", message: "Enter a name." });
+
+  return errors;
+}
+
+function displayErrors(errors) {
+  errors.forEach((e) => {
+    const displayClass = document.querySelector(e.class);
+    displayClass.textContent = e.message;
+  });
 }
 
 function getTransactionType() {
