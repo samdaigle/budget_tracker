@@ -160,6 +160,7 @@ function checkTypeValidity() {
 
 function checkAmountValidity(value) {
   if (Number(value) <= 0) {
+    return false;
   } else {
     return true;
   }
