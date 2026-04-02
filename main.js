@@ -200,11 +200,24 @@ function getTransactionType() {
   }
 }
 
+function displayNoTransactions() {
+  const noTransactions = document.createElement("span");
+  noTransactions.textContent = "No Recent Transactions";
+  noTransactions.classList = "transaction__none";
+  transactionsDisplay.appendChild(noTransactions);
+}
+
 function renderDisplay() {
   updateSummaryDisplay();
   transactionsDisplay.innerHTML = "";
+  if (transactions.length === 0) {
+    displayNoTransactions();
+    return;
+  }
   transactions.forEach((e) => {
     const transaction = createTransactionElement(e);
     transactionsDisplay.appendChild(transaction);
   });
 }
+
+renderDisplay();
