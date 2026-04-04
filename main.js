@@ -98,8 +98,11 @@ function clearForm() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const errors = validateForm();
-  displayErrors(errors);
+  if (!validateForm()) {
+    displayErrors();
+    return;
+  }
+
   const amountValue = +amount.value;
   const newTransaction = {
     id: crypto.randomUUID(),
@@ -158,49 +161,60 @@ function checkTypeValidity() {
   }
 }
 
-function checkAmountValidity(value) {
-  if (Number(value) <= 0) {
+function checkNumberValidity(value) {
+  if (!value || isNaN(value) || Number(value) <= 0) {
     return false;
   } else {
     return true;
   }
 }
 
-function checkNameValidity(value) {
-  if (value.trim() === "") {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function checkCategoryValidity(value) {
-  if (value.selectedIndex === 0) {
-    return false;
-  } else {
-    return true;
+function checkTextValidity(...inputs) {
+  for (current in inputs) {
+    console.log(inputs[current]);
+    if (!inputs[current]) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
 function validateForm() {
+  if (
+    checkTypeValidity() &&
+    checkNumberValidity(amount.value) &&
+    checkTextValidity(description.value, categories.value)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function compileErrors() {
   const errors = [];
 
   if (!checkTypeValidity())
     errors.push({ class: ".type-error", message: "Pick a type." });
-  if (!checkAmountValidity(amount.value))
+  if (!checkNumberValidity(amount.value))
     errors.push({
       class: ".amount-error",
       message: "Enter a positive number.",
     });
-  if (!checkCategoryValidity(category))
+  if (!checkTextValidity(category[category.selectedIndex].value))
     errors.push({ class: ".category-error", message: "Pick a category." });
-  if (!checkNameValidity(description.value))
-    errors.push({ class: ".name-error", message: "Enter a name." });
+  if (!checkTextValidity(description.value))
+    errors.push({ class: ".description-error", message: "Enter a name." });
 
   return errors;
 }
 
-function displayErrors(errors) {
+function displayErrors() {
+  const errors = compileErrors();
+  if (errors.length === 0) {
+    return;
+  }
   errors.forEach((e) => {
     const displayClass = document.querySelector(e.class);
     displayClass.textContent = e.message;
