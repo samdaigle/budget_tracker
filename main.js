@@ -98,12 +98,18 @@ function clearForm() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (!validateForm()) {
+  const inputs = {
+    type: getTransactionType(),
+    name: description.value,
+    amount: Number(amount.value),
+    category: category.options[category.selectedIndex].text,
+  };
+  if (!validateForm(inputs)) {
     displayErrors();
     return;
   }
 
-  const amountValue = +amount.value;
+  const amountValue = Number(amount.value);
   const newTransaction = {
     id: crypto.randomUUID(),
     name: description.value,
@@ -153,72 +159,59 @@ function updateSummaryDisplay() {
   balance.textContent = `$${values.balance.toFixed(2)}`;
 }
 
-function checkTypeValidity() {
-  if (!incomeBtn.checked && !expenseBtn.checked) {
-    return false;
-  } else {
+function checkTypeValidity(type) {
+  if (type === "income" || type === "expense") {
     return true;
+  } else {
+    return false;
   }
 }
 
 function checkNumberValidity(value) {
-  if (!value || isNaN(value) || Number(value) <= 0) {
+  if (isNaN(value) || value <= 0) {
     return false;
   } else {
     return true;
   }
 }
 
-function checkTextValidity(...inputs) {
-  for (current in inputs) {
-    console.log(inputs[current]);
-    if (!inputs[current]) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-}
-
-function validateForm() {
-  if (
-    checkTypeValidity() &&
-    checkNumberValidity(amount.value) &&
-    checkTextValidity(description.value, categories.value)
-  ) {
-    return true;
-  } else {
+function checkNameValidity(value) {
+  if (value.trim() === "") {
     return false;
+  } else {
+    return true;
   }
 }
 
-function compileErrors() {
+function checkCategoryValidity(value) {
+  if (value === "") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validateForm(object) {
   const errors = [];
+  const isFormValid = true;
 
-  if (!checkTypeValidity())
-    errors.push({ class: ".type-error", message: "Pick a type." });
-  if (!checkNumberValidity(amount.value))
-    errors.push({
-      class: ".amount-error",
-      message: "Enter a positive number.",
-    });
-  if (!checkTextValidity(category[category.selectedIndex].value))
-    errors.push({ class: ".category-error", message: "Pick a category." });
-  if (!checkTextValidity(description.value))
-    errors.push({ class: ".description-error", message: "Enter a name." });
-
-  return errors;
-}
-
-function displayErrors() {
-  const errors = compileErrors();
-  if (errors.length === 0) {
-    return;
+  if (!checkTypeValidity(object.type)) {
+    isFormValid = false;
+    errors.push({ field: "type", message: "Pick a type" });
   }
-  errors.forEach((e) => {
-    const displayClass = document.querySelector(e.class);
-    displayClass.textContent = e.message;
-  });
+  if (!checkNumberValidity(object.amount)) {
+    isFormValid = false;
+    errors.push({ field: "amount", message: "Enter a positive number" });
+  }
+  if (!checkNameValidity(object.name)) {
+    isFormValid = false;
+    errors.push({ field: "name", message: "Enter a name" });
+  }
+  if (!checkCategoryValidity(object.category)) {
+    isFormValid = false;
+    errors.push({ field: "category", message: "Pick a category" });
+  }
+  return (isFormValid, errors);
 }
 
 function getTransactionType() {
