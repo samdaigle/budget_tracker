@@ -102,10 +102,13 @@ form.addEventListener("submit", (e) => {
     type: getTransactionType(),
     name: description.value,
     amount: Number(amount.value),
-    category: category.options[category.selectedIndex].text,
+    category: category.options[category.selectedIndex].value,
   };
-  if (!validateForm(inputs)) {
-    displayErrors();
+  const [isInputValid, errors] = validateForm(inputs);
+  console.log(isInputValid);
+  console.log(errors);
+  if (!isInputValid) {
+    displayErrors(errors);
     return;
   }
 
@@ -115,7 +118,7 @@ form.addEventListener("submit", (e) => {
     name: description.value,
     amount: amountValue,
     type: getTransactionType(),
-    category: category.options[category.selectedIndex].text,
+    category: category.options[category.selectedIndex].value,
   };
   transactions.push(newTransaction);
   clearForm();
@@ -193,7 +196,7 @@ function checkCategoryValidity(value) {
 
 function validateForm(object) {
   const errors = [];
-  const isFormValid = true;
+  let isFormValid = true;
 
   if (!checkTypeValidity(object.type)) {
     isFormValid = false;
@@ -211,7 +214,19 @@ function validateForm(object) {
     isFormValid = false;
     errors.push({ field: "category", message: "Pick a category" });
   }
-  return (isFormValid, errors);
+  return [isFormValid, errors];
+}
+
+function displayErrors(array) {
+  if (array.length === 0) {
+    return;
+  }
+
+  array.forEach((e) => {
+    const errorClass = `.${e.field}-error`;
+    const errorDisplay = document.querySelector(errorClass);
+    errorDisplay.textContent = e.message;
+  });
 }
 
 function getTransactionType() {
