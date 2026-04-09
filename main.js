@@ -106,20 +106,17 @@ form.addEventListener("submit", (e) => {
     category: category.options[category.selectedIndex].value,
   };
   const [isInputValid, errors] = validateForm(inputs);
-  console.log(isInputValid);
-  console.log(errors);
   if (!isInputValid) {
     displayErrors(errors);
     return;
   }
 
-  const amountValue = Number(amount.value);
   const newTransaction = {
     id: crypto.randomUUID(),
-    name: description.value,
-    amount: amountValue,
+    name: inputs.name,
+    amount: inputs.amount,
     type: getTransactionType(),
-    category: category.options[category.selectedIndex].value,
+    category: inputs.category,
   };
   transactions.push(newTransaction);
   clearForm();
@@ -164,35 +161,19 @@ function updateSummaryDisplay() {
 }
 
 function checkTypeValidity(type) {
-  if (type === "income" || type === "expense") {
-    return true;
-  } else {
-    return false;
-  }
+  return type === "income" || type === "expense";
 }
 
 function checkNumberValidity(value) {
-  if (isNaN(value) || value <= 0) {
-    return false;
-  } else {
-    return true;
-  }
+  return !isNaN(value) && value > 0;
 }
 
 function checkNameValidity(value) {
-  if (value.trim() === "") {
-    return false;
-  } else {
-    return true;
-  }
+  return value.trim() !== "";
 }
 
 function checkCategoryValidity(value) {
-  if (value === "") {
-    return false;
-  } else {
-    return true;
-  }
+  return value !== "";
 }
 
 function validateForm(object) {
