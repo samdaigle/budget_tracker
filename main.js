@@ -98,6 +98,7 @@ function clearForm() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  clearErrors();
   const inputs = {
     type: getTransactionType(),
     name: description.value,
@@ -226,6 +227,13 @@ function displayErrors(array) {
     const errorClass = `.${e.field}-error`;
     const errorDisplay = document.querySelector(errorClass);
     errorDisplay.textContent = e.message;
+  });
+}
+
+function clearErrors() {
+  const errorDisplays = document.querySelectorAll(".error");
+  errorDisplays.forEach((e) => {
+    e.textContent = "";
   });
 }
 
