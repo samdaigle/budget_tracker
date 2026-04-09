@@ -82,10 +82,12 @@ function createTransactionElement(object) {
 }
 
 transactionsDisplay.addEventListener("click", (e) => {
-  const target = e.target.parentNode;
-  const index = transactions.findIndex((value) => value.id === target.id);
-  transactions.splice(index, 1);
-  renderDisplay();
+  if (e.target.className === "transaction__delete") {
+    const target = e.target.parentNode;
+    const index = transactions.findIndex((value) => value.id === target.id);
+    transactions.splice(index, 1);
+    renderDisplay();
+  }
 });
 
 function clearForm() {
@@ -115,7 +117,7 @@ form.addEventListener("submit", (e) => {
     id: crypto.randomUUID(),
     name: inputs.name,
     amount: inputs.amount,
-    type: getTransactionType(),
+    type: inputs.type,
     category: inputs.category,
   };
   transactions.push(newTransaction);
