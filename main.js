@@ -1,4 +1,4 @@
-const transactions = [];
+const transactions = pullLocalStorage();
 const categories = [
   "paycheck",
   "rent",
@@ -86,6 +86,7 @@ transactionsDisplay.addEventListener("click", (e) => {
     const target = e.target.parentNode;
     const index = transactions.findIndex((value) => value.id === target.id);
     transactions.splice(index, 1);
+    updateLocalStorage();
     renderDisplay();
   }
 });
@@ -121,9 +122,7 @@ form.addEventListener("submit", (e) => {
     category: inputs.category,
   };
   transactions.push(newTransaction);
-  const state = JSON.stringify(transactions);
-  window.localStorage.setItem("transactions", state);
-  console.log(localStorage);
+  updateLocalStorage();
   clearForm();
   form.classList.add("form__hidden");
   renderDisplay();
@@ -252,16 +251,22 @@ function renderDisplay() {
 }
 
 function pullLocalStorage() {
+  const items = [];
   const storedItems = localStorage.getItem("transactions");
   if (!storedItems) {
-    return;
+    return items;
   }
   const convertedItems = JSON.parse(storedItems);
   convertedItems.forEach((e) => {
-    transactions.push(e);
+    items.push(e);
   });
+  return items;
 }
 
-pullLocalStorage();
+function updateLocalStorage() {
+  localStorage.clear();
+  const dataForStorage = JSON.stringify(transactions);
+  window.localStorage.setItem("transactions", dataForStorage);
+}
 
 renderDisplay();
