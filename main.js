@@ -264,7 +264,7 @@ function pullLocalStorage() {
 }
 
 function updateLocalStorage() {
-  localStorage.clear();
+  localStorage.removeItem("transactions");
   const dataForStorage = JSON.stringify(transactions);
   window.localStorage.setItem("transactions", dataForStorage);
 }
