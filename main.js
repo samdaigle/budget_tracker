@@ -257,10 +257,7 @@ function pullLocalStorage() {
     return items;
   }
   const convertedItems = JSON.parse(storedItems);
-  convertedItems.forEach((e) => {
-    items.push(e);
-  });
-  return items;
+  return convertedItems;
 }
 
 function updateLocalStorage() {
