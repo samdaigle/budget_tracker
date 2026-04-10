@@ -58,3 +58,7 @@ body {
 .form__hidden {
   display: none;
 }
+
+.error {
+  color: red;
+}

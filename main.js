@@ -121,6 +121,9 @@ form.addEventListener("submit", (e) => {
     category: inputs.category,
   };
   transactions.push(newTransaction);
+  const state = JSON.stringify(transactions);
+  window.localStorage.setItem("transactions", state);
+  console.log(localStorage);
   clearForm();
   form.classList.add("form__hidden");
   renderDisplay();
@@ -247,5 +250,18 @@ function renderDisplay() {
     transactionsDisplay.appendChild(transaction);
   });
 }
+
+function pullLocalStorage() {
+  const storedItems = localStorage.getItem("transactions");
+  if (!storedItems) {
+    return;
+  }
+  const convertedItems = JSON.parse(storedItems);
+  convertedItems.forEach((e) => {
+    transactions.push(e);
+  });
+}
+
+pullLocalStorage();
 
 renderDisplay();
