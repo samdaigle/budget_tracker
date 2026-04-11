@@ -1,4 +1,4 @@
-const transactions = pullLocalStorage();
+const transactions = getStoredData();
 const categories = [
   "paycheck",
   "rent",
@@ -32,7 +32,6 @@ const submitBtn = document.querySelector("#submit-btn");
 const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
-const amountError = document.querySelector(".amount-error");
 
 categories.forEach((e) => {
   const option = document.createElement("option");
@@ -114,14 +113,16 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  const newTransaction = {
-    id: crypto.randomUUID(),
-    name: inputs.name,
-    amount: inputs.amount,
-    type: inputs.type,
-    category: inputs.category,
-  };
-  transactions.push(newTransaction);
+  // const newTransaction = {
+  //   id: crypto.randomUUID(),
+  //   name: inputs.name,
+  //   amount: inputs.amount,
+  //   type: inputs.type,
+  //   category: inputs.category,
+  // };
+  inputs.id = crypto.randomUUID();
+  addToTransactions(inputs);
+
   updateLocalStorage();
   clearForm();
   form.classList.add("form__hidden");
@@ -145,6 +146,7 @@ function buildSummaryObject() {
       } else if (b.type === "expense") {
         a.expenses += b.amount;
       }
+      a.balance = a.income - a.expenses;
       return a;
     },
     {
@@ -153,7 +155,6 @@ function buildSummaryObject() {
       balance: 0,
     },
   );
-  summaryValues.balance = summaryValues.income - summaryValues.expenses;
   return summaryValues;
 }
 
@@ -250,7 +251,7 @@ function renderDisplay() {
   });
 }
 
-function pullLocalStorage() {
+function getStoredData() {
   const items = [];
   const storedItems = localStorage.getItem("transactions");
   if (!storedItems) {
@@ -265,5 +266,13 @@ function updateLocalStorage() {
   const dataForStorage = JSON.stringify(transactions);
   window.localStorage.setItem("transactions", dataForStorage);
 }
+
+function addToTransactions(inputs) {
+  transactions.push(inputs);
+}
+
+function removeFromTransactions(id) {}
+
+function handleTransactionUpdates() {}
 
 renderDisplay();
