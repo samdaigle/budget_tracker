@@ -84,9 +84,8 @@ transactionsDisplay.addEventListener("click", (e) => {
   if (e.target.className === "transaction__delete") {
     const target = e.target.parentNode;
     const index = transactions.findIndex((value) => value.id === target.id);
-    transactions.splice(index, 1);
-    updateLocalStorage();
-    renderDisplay();
+    removeFromTransactions(index);
+    handleTransactionUpdates();
   }
 });
 
@@ -113,20 +112,11 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  // const newTransaction = {
-  //   id: crypto.randomUUID(),
-  //   name: inputs.name,
-  //   amount: inputs.amount,
-  //   type: inputs.type,
-  //   category: inputs.category,
-  // };
   inputs.id = crypto.randomUUID();
   addToTransactions(inputs);
-
-  updateLocalStorage();
+  handleTransactionUpdates();
   clearForm();
   form.classList.add("form__hidden");
-  renderDisplay();
 });
 
 cancelBtn.addEventListener("click", () => {
@@ -271,8 +261,13 @@ function addToTransactions(inputs) {
   transactions.push(inputs);
 }
 
-function removeFromTransactions(id) {}
+function removeFromTransactions(index) {
+  transactions.splice(index, 1);
+}
 
-function handleTransactionUpdates() {}
+function handleTransactionUpdates() {
+  updateLocalStorage();
+  renderDisplay();
+}
 
 renderDisplay();
