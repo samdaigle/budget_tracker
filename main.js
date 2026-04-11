@@ -85,7 +85,6 @@ transactionsDisplay.addEventListener("click", (e) => {
     const target = e.target.parentNode;
     const index = transactions.findIndex((value) => value.id === target.id);
     removeFromTransactions(index);
-    handleTransactionUpdates();
   }
 });
 
@@ -114,7 +113,6 @@ form.addEventListener("submit", (e) => {
 
   inputs.id = crypto.randomUUID();
   addToTransactions(inputs);
-  handleTransactionUpdates();
   clearForm();
   form.classList.add("form__hidden");
 });
@@ -242,13 +240,11 @@ function renderDisplay() {
 }
 
 function getStoredData() {
-  const items = [];
   const storedItems = localStorage.getItem("transactions");
   if (!storedItems) {
-    return items;
+    return [];
   }
-  const convertedItems = JSON.parse(storedItems);
-  return convertedItems;
+  return JSON.parse(storedItems);
 }
 
 function updateLocalStorage() {
@@ -259,10 +255,15 @@ function updateLocalStorage() {
 
 function addToTransactions(inputs) {
   transactions.push(inputs);
+  handleTransactionUpdates();
 }
 
 function removeFromTransactions(index) {
+  if (index === -1) {
+    return;
+  }
   transactions.splice(index, 1);
+  handleTransactionUpdates();
 }
 
 function handleTransactionUpdates() {
