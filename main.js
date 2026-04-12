@@ -241,10 +241,14 @@ function renderDisplay() {
 
 function getStoredData() {
   const storedItems = localStorage.getItem("transactions");
-  if (!storedItems) {
+  if (storedItems === null) {
     return [];
   }
-  return JSON.parse(storedItems);
+  try {
+    return JSON.parse(storedItems);
+  } catch {
+    return [];
+  }
 }
 
 function updateLocalStorage() {
