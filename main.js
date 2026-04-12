@@ -1,4 +1,4 @@
-const transactions = getStoredData();
+const transactions = loadTransactions();
 const categories = [
   "paycheck",
   "rent",
@@ -216,6 +216,8 @@ function getTransactionType() {
     return "income";
   } else if (expenseBtn.checked) {
     return "expense";
+  } else {
+    return null;
   }
 }
 
@@ -249,6 +251,31 @@ function getStoredData() {
   } catch {
     return [];
   }
+}
+
+function validateId(id) {
+  const uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(id);
+}
+
+function validateCategory(category) {
+  return categories.includes(category);
+}
+
+function validateStoredData(data) {
+  return (
+    validateId(data.id) &&
+    checkNumberValidity(data.amount) &&
+    checkNameValidity(data.name) &&
+    checkTypeValidity(data.type) &&
+    validateCategory(data.category)
+  );
+}
+
+function loadTransactions() {
+  const storedTransactions = getStoredData();
+  return storedTransactions.filter(validateStoredData);
 }
 
 function updateLocalStorage() {
