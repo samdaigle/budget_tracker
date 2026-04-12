@@ -1,4 +1,3 @@
-const transactions = loadTransactions();
 const categories = [
   "paycheck",
   "rent",
@@ -12,6 +11,7 @@ const categories = [
   "clothing",
   "entertainment",
 ];
+const transactions = loadTransactions();
 
 const income = document.querySelector(
   ".summary__item--income > .summary__value",
