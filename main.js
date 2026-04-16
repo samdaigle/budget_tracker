@@ -70,21 +70,21 @@ function createTransactionElement(object) {
     "transaction__category",
   );
   newTransaction.appendChild(transactionCategory);
+  newTransaction.setAttribute("id", id);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   deleteBtn.classList.add("transaction__delete");
+  deleteBtn.dataset.id = id;
   newTransaction.appendChild(deleteBtn);
-  newTransaction.setAttribute("id", id);
 
   return newTransaction;
 }
 
 transactionsDisplay.addEventListener("click", (e) => {
-  if (e.target.className === "transaction__delete") {
-    const target = e.target.parentNode;
-    const index = transactions.findIndex((value) => value.id === target.id);
-    removeFromTransactions(index);
+  if (e.target.classList.contains("transaction__delete")) {
+    const targetId = e.target.dataset.id;
+    removeFromTransactions(targetId);
   }
 });
 
@@ -279,9 +279,12 @@ function loadTransactions() {
 }
 
 function updateLocalStorage() {
-  localStorage.removeItem("transactions");
   const dataForStorage = JSON.stringify(transactions);
   window.localStorage.setItem("transactions", dataForStorage);
+}
+
+function findIndexById(id) {
+  return transactions.findIndex((value) => value.id === id);
 }
 
 function addToTransactions(inputs) {
@@ -289,7 +292,8 @@ function addToTransactions(inputs) {
   handleTransactionUpdates();
 }
 
-function removeFromTransactions(index) {
+function removeFromTransactions(id) {
+  const index = findIndexById(id);
   if (index === -1) {
     return;
   }

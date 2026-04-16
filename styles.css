@@ -51,7 +51,8 @@ body {
   padding: 10px;
 }
 
-.btn:hover {
+.btn:hover,
+.transaction__delete {
   cursor: pointer;
 }
 
