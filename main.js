@@ -146,15 +146,15 @@ function buildSummaryObject() {
   return summaryValues;
 }
 
-function updateSummaryDisplay() {
+function updateSummaryDisplay(values) {
   income.textContent = `$${values.income.toFixed(2)}`;
   expenses.textContent = `$${values.expenses.toFixed(2)}`;
   balance.textContent = `$${values.balance.toFixed(2)}`;
 }
 
 function handleSummaryUpdates() {
-  const values = buildSummaryObject();
-  updateSummaryDisplay(values);
+  const summaryValues = buildSummaryObject();
+  updateSummaryDisplay(summaryValues);
 }
 
 function checkTypeValidity(type) {
@@ -310,4 +310,4 @@ function handleTransactionUpdates() {
   renderDisplay();
 }
 
-renderDisplay();
+handleTransactionUpdates();
