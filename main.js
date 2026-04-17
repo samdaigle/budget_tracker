@@ -99,8 +99,13 @@ function clearForm() {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   clearErrors();
+  const transactionType = incomeBtn.checked
+    ? "income"
+    : expenseBtn.checked
+      ? "expense"
+      : null;
   const inputs = {
-    type: getTransactionType(),
+    type: transactionType,
     name: description.value,
     amount: Number(amount.value),
     category: category.options[category.selectedIndex].value,
@@ -213,16 +218,6 @@ function clearErrors() {
   errorDisplays.forEach((e) => {
     e.textContent = "";
   });
-}
-
-function getTransactionType() {
-  if (incomeBtn.checked) {
-    return "income";
-  } else if (expenseBtn.checked) {
-    return "expense";
-  } else {
-    return null;
-  }
 }
 
 function displayNoTransactions() {
