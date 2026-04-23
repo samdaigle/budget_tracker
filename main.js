@@ -227,13 +227,13 @@ function displayNoTransactions() {
   transactionsDisplay.appendChild(noTransactions);
 }
 
-function renderDisplay() {
+function renderDisplay(display) {
   transactionsDisplay.innerHTML = "";
-  if (transactions.length === 0) {
+  if (display.length === 0) {
     displayNoTransactions();
     return;
   }
-  transactions.forEach((e) => {
+  display.forEach((e) => {
     const transaction = createTransactionElement(e);
     transactionsDisplay.appendChild(transaction);
   });
