@@ -276,13 +276,13 @@ function loadTransactions() {
   return storedTransactions.filter(validateStoredData);
 }
 
-function updateLocalStorage() {
-  const dataForStorage = JSON.stringify(transactions);
+function updateLocalStorage(transactionData) {
+  const dataForStorage = JSON.stringify(transactionData);
   window.localStorage.setItem("transactions", dataForStorage);
 }
 
-function findIndexById(id) {
-  return transactions.findIndex((value) => value.id === id);
+function findIndexById(array, id) {
+  return array.findIndex((value) => value.id === id);
 }
 
 function addToTransactions(inputs) {
@@ -291,7 +291,7 @@ function addToTransactions(inputs) {
 }
 
 function removeFromTransactions(id) {
-  const index = findIndexById(id);
+  const index = findIndexById(transactions, id);
   if (index === -1) {
     return;
   }
@@ -300,9 +300,9 @@ function removeFromTransactions(id) {
 }
 
 function handleTransactionUpdates() {
-  updateLocalStorage();
+  updateLocalStorage(transactions);
   handleSummaryUpdates();
-  renderDisplay();
+  renderDisplay(transactions);
 }
 
 handleTransactionUpdates();
