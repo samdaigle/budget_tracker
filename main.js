@@ -131,8 +131,8 @@ addTransactionBtn.addEventListener("click", () => {
   form.classList.remove("form__hidden");
 });
 
-function buildSummaryObject() {
-  const summaryValues = transactions.reduce(
+function buildSummaryObject(transactionData) {
+  const summaryValues = transactionData.reduce(
     (a, b) => {
       if (b.type === "income") {
         a.income += b.amount;
@@ -157,8 +157,8 @@ function updateSummaryDisplay(values) {
   balance.textContent = `$${values.balance.toFixed(2)}`;
 }
 
-function handleSummaryUpdates() {
-  const summaryValues = buildSummaryObject();
+function handleSummaryUpdates(transactionData) {
+  const summaryValues = buildSummaryObject(transactionData);
   updateSummaryDisplay(summaryValues);
 }
 
@@ -301,7 +301,7 @@ function removeFromTransactions(id) {
 
 function handleTransactionUpdates() {
   updateLocalStorage(transactions);
-  handleSummaryUpdates();
+  handleSummaryUpdates(transactions);
   renderDisplay(transactions);
 }
 
