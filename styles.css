@@ -1,8 +1,14 @@
+:root {
+  --coral: #d85a30;
+  --background: #f4f2ee;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   align-items: center;
