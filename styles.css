@@ -32,11 +32,10 @@ body {
   gap: 16px;
 }
 
-.summary,
+.summary__item,
 .form,
 .transactions {
-  width: 100%;
-  padding: 10px 0px;
+  padding: 14px;
 }
 
 /* transaction display */
@@ -98,7 +97,11 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background-color: var(--color-bg-card);
+  border: 0.5px solid var(--color-border-card);
+  border-radius: var(--border-radius-card);
 }
+
 .form__title {
   width: 100%;
   max-width: 500px;
