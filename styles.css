@@ -1,19 +1,28 @@
 :root {
-  --coral: #d85a30;
-  --background: #f4f2ee;
+  --color-bg-page: #f4f2ee;
+  --color-bg-card: #ffffff;
+  --color-border-card: #e8e8e8;
+  --color-border-row: #f2f2f2;
+
+  /* text */
+  --color-text-primary: #111111;
+  --color-text-muted: #999999;
+  --color-text-subtle: #bbbbbb;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--color-bg-page);
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .summary,
@@ -24,12 +33,29 @@ body {
   padding: 10px 0px;
 }
 
-.summary__item,
 .transaction {
   display: flex;
+  background-color: var(--color-bg-card);
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
+}
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+  width: 649px;
+  height: 89px;
+}
+
+.summary__item {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-card);
+  padding: 14px;
+  border: 0.5px solid var(--color-border-card);
+  border-radius: 10px;
 }
 
 .transaction__item {
