@@ -29,7 +29,6 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
 }
 
@@ -106,6 +105,10 @@ body {
 }
 .form__group {
   width: 230px;
+}
+
+.btn--primary {
+  align-self: center;
 }
 
 .btn,
