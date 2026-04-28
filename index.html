@@ -7,61 +7,63 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1 class="app-header">My Budget</h1>
-    <div class="summary">
-      <div class="summary__item summary__item--balance">
-        <span class="summary__label">Total Balance:</span>
-        <span class="summary__value"></span>
+    <div class="container">
+      <h1 class="app-header">My Budget</h1>
+      <div class="summary">
+        <div class="summary__item summary__item--balance">
+          <span class="summary__label">Total Balance:</span>
+          <span class="summary__value"></span>
+        </div>
+        <div class="summary__item summary__item--income">
+          <span class="summary__label">Income:</span>
+          <span class="summary__value"></span>
+        </div>
+        <div class="summary__item summary__item--expense">
+          <span class="summary__label">Expenses:</span>
+          <span class="summary__value"></span>
+        </div>
       </div>
-      <div class="summary__item summary__item--income">
-        <span class="summary__label">Income:</span>
-        <span class="summary__value"></span>
-      </div>
-      <div class="summary__item summary__item--expense">
-        <span class="summary__label">Expenses:</span>
-        <span class="summary__value"></span>
-      </div>
+
+      <button class="btn btn--primary">Add Transaction</button>
+
+      <form class="form form__hidden">
+        <h3 class="form__title">Add Transaction</h3>
+        <div class="btn__group">
+          <p>*Type:</p>
+          <div class="form__group">
+            <input type="radio" name="type" id="income-button" />
+            <label for="income-button">Income</label>
+          </div>
+          <div class="form__group">
+            <input type="radio" name="type" id="expense-button" />
+            <label for="expense-button">Expense</label>
+          </div>
+          <span class="error type-error"></span>
+        </div>
+        <div class="form__group">
+          <label for="amount">*Amount:</label>
+          <input type="number" step="0.01" id="amount"/>
+          <span class="error amount-error"></span>
+        </div>
+        <div class="form__group">
+          <label for="categories">*Category:</label>
+          <select name="categories" id="category-select">
+            <option value="">--Please choose an option--</option>
+          </select>
+          <span class="error category-error"></span>
+        </div>
+        <div class="form__group">
+          <label for="description">*Name:</label>
+          <input type="text" id="description" />
+          <span class="error name-error"></span>
+        </div>
+        <input type="submit" id="submit-btn"></input>
+        <button class="btn btn--cancel">Cancel</button>
+      </form>
+
+      <h2 class="transactions__title">Recent Transactions</h2>
+      <div class="transactions"></div>
     </div>
-
-    <button class="btn btn--primary">Add Transaction</button>
-
-    <form class="form form__hidden">
-      <h3 class="form__title">Add Transaction</h3>
-      <div class="btn__group">
-        <p>*Type:</p>
-        <div class="form__group">
-          <input type="radio" name="type" id="income-button" />
-          <label for="income-button">Income</label>
-        </div>
-        <div class="form__group">
-          <input type="radio" name="type" id="expense-button" />
-          <label for="expense-button">Expense</label>
-        </div>
-        <span class="error type-error"></span>
-      </div>
-      <div class="form__group">
-        <label for="amount">*Amount:</label>
-        <input type="number" step="0.01" id="amount"/>
-        <span class="error amount-error"></span>
-      </div>
-      <div class="form__group">
-        <label for="categories">*Category:</label>
-        <select name="categories" id="category-select">
-          <option value="">--Please choose an option--</option>
-        </select>
-        <span class="error category-error"></span>
-      </div>
-      <div class="form__group">
-        <label for="description">*Name:</label>
-        <input type="text" id="description" />
-        <span class="error name-error"></span>
-      </div>
-      <input type="submit" id="submit-btn"></input>
-      <button class="btn btn--cancel">Cancel</button>
-    </form>
-
-    <h2 class="transactions__title">Recent Transactions</h2>
-    <div class="transactions"></div>
     <script src="main.js"></script>
   </body>
 </html>
