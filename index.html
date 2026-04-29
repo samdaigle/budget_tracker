@@ -44,18 +44,24 @@
           <span class="error type-error"></span>
         </div>
    
-        <div class="form__group">
-          <label for="amount">*Amount:</label>
-          <input type="number" step="0.01" id="amount"/>
-          <span class="error amount-error"></span>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label for="amount">*Amount:</label>
+            <input type="number" step="0.01" id="amount"/>
+            <span class="error amount-error"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="categories">*Category:</label>
+            <select name="categories" id="category-select">
+              <option value="">--Please choose an option--</option>
+            </select>
+            <span class="error category-error"></span>
+          </div>
+          
         </div>
-        <div class="form__group">
-          <label for="categories">*Category:</label>
-          <select name="categories" id="category-select">
-            <option value="">--Please choose an option--</option>
-          </select>
-          <span class="error category-error"></span>
-        </div>
+
         <div class="form__group">
           <label for="description">*Name:</label>
           <input type="text" id="description" />

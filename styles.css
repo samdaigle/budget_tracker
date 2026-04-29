@@ -97,7 +97,7 @@ body {
 
 .form {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -112,7 +112,7 @@ body {
 }
 
 .form__group {
-  width: 230px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -145,6 +145,27 @@ select:focus {
 .form__group:has(> input[type="radio"]) {
   flex-direction: row;
   align-items: center;
+}
+
+.form__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.form__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  width: 100%;
+}
+
+.form__row > .form__group {
+  flex: 1;
 }
 
 .btn--primary {
