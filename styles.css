@@ -10,6 +10,8 @@
   --color-text-primary: #111111;
   --color-text-muted: #999999;
   --color-text-subtle: #bbbbbb;
+  --color-text-income: #1d9e75;
+  --color-text-expense: #d85a30;
 
   --border-radius-card: 10px;
 }
@@ -24,6 +26,7 @@
 body {
   background-color: var(--color-bg-page);
   height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -32,6 +35,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 20px 0;
 }
 
 .summary__item,
@@ -91,6 +95,14 @@ body {
   color: var(--color-text-primary);
   font-size: 20px;
   font-weight: 500;
+}
+
+.summary__item--income > .summary__value {
+  color: var(--color-text-income);
+}
+
+.summary__item--expense > .summary__value {
+  color: var(--color-text-expense);
 }
 
 /* form */
