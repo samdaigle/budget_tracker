@@ -64,10 +64,6 @@ body {
   border-bottom: none;
 }
 
-.transaction__item {
-  width: 30px;
-}
-
 /* summary display */
 
 .summary {
@@ -88,13 +84,13 @@ body {
 
 .summary__label {
   color: var(--color-text-muted);
-  font-size: 11px;
+  font-size: 0.75rem;
 }
 
 .summary__value {
   color: var(--color-text-primary);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .summary__item--income > .summary__value {
@@ -116,11 +112,8 @@ body {
   background-color: var(--color-bg-card);
   border: 0.5px solid var(--color-border-card);
   border-radius: var(--border-radius-card);
-}
-
-.form__title {
-  width: 100%;
   max-width: 500px;
+  align-self: center;
 }
 
 .form__group {

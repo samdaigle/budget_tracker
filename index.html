@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budget Tracker</title>
     <link rel="stylesheet" href="./styles.css" />
+  </head>
   <body>
     <div class="container">
       <h1 class="app-header">My Budget</h1>
@@ -23,11 +24,11 @@
         </div>
       </div>
 
-      <button class="btn btn--primary"> Add Transaction</button>
+      <button class="btn btn--primary">Add Transaction</button>
 
       <form class="form form__hidden">
         <h3 class="form__title">Add Transaction</h3>
-        
+
         <div class="form__group">
           <p>*Type:</p>
           <div class="btn__group">
@@ -46,7 +47,7 @@
         <div class="form__row">
           <div class="form__group">
             <label for="amount">*Amount:</label>
-            <input type="number" step="0.01" id="amount"/>
+            <input type="number" step="0.01" id="amount" />
             <span class="error amount-error"></span>
           </div>
 
@@ -65,7 +66,7 @@
           <span class="error name-error"></span>
         </div>
         <div class="form__actions">
-          <input type="submit" id="submit-btn"></input>
+          <input type="submit" id="submit-btn" />
           <button class="btn btn--cancel">Cancel</button>
         </div>
       </form>
