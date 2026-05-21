@@ -94,6 +94,7 @@ function clearForm() {
   amount.value = "";
   description.value = "";
   category.selectedIndex = 0;
+  clearErrors();
 }
 
 form.addEventListener("submit", (e) => {
