@@ -1,16 +1,19 @@
-const categories = [
-  "paycheck",
-  "rent",
-  "utilities",
-  "insurance",
-  "gas",
-  "transportation",
-  "groceries",
-  "dining out",
-  "haircut",
-  "clothing",
-  "entertainment",
-];
+const categories = {
+  expense: [
+    "rent",
+    "utilities",
+    "insurance",
+    "gas",
+    "transportation",
+    "groceries",
+    "dining out",
+    "haircut",
+    "clothing",
+    "entertainment",
+  ],
+  income: ["paycheck", "bonus", "gift", "venmo"],
+};
+
 const transactions = loadTransactions();
 
 const income = document.querySelector(
@@ -33,12 +36,26 @@ const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
 
-categories.forEach((e) => {
-  const option = document.createElement("option");
-  option.setAttribute("value", e);
-  option.textContent = e;
-  category.appendChild(option);
-});
+function populateCategoryList(categoryValues) {
+  categoryValues.forEach((e) => {
+    const option = document.createElement("option");
+    option.setAttribute("value", e);
+    option.textContent = e;
+    category.appendChild(option);
+  });
+}
+
+function enableCategoryList() {
+  const categoryType = income.checked
+    ? "income"
+    : expenses.checked
+      ? "expense"
+      : null;
+  if (categoryType) {
+    populateCategoryList(categories.categoryType);
+    category.removeAttribute("disbaled");
+  }
+}
 
 function addTransactionElement(content, className) {
   const transactionElement = document.createElement("span");
@@ -94,6 +111,7 @@ function clearForm() {
   amount.value = "";
   description.value = "";
   category.selectedIndex = 0;
+  category.setAttribute("disabled");
   clearErrors();
 }
 
