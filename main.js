@@ -36,27 +36,6 @@ const cancelBtn = document.querySelector(".btn--cancel");
 const transactionsDisplay = document.querySelector(".transactions");
 const form = document.querySelector(".form");
 
-function populateCategoryList(categoryValues) {
-  categoryValues.forEach((e) => {
-    const option = document.createElement("option");
-    option.setAttribute("value", e);
-    option.textContent = e;
-    category.appendChild(option);
-  });
-}
-
-function enableCategoryList() {
-  const categoryType = income.checked
-    ? "income"
-    : expenses.checked
-      ? "expense"
-      : null;
-  if (categoryType) {
-    populateCategoryList(categories.categoryType);
-    category.removeAttribute("disbaled");
-  }
-}
-
 function addTransactionElement(content, className) {
   const transactionElement = document.createElement("span");
   transactionElement.textContent = content;
@@ -111,9 +90,33 @@ function clearForm() {
   amount.value = "";
   description.value = "";
   category.selectedIndex = 0;
-  category.setAttribute("disabled");
+  category.disabled = true;
   clearErrors();
 }
+
+function populateCategoryList(categoryValues) {
+  categoryValues.forEach((e) => {
+    const option = document.createElement("option");
+    option.setAttribute("value", e);
+    option.textContent = e;
+    category.appendChild(option);
+  });
+}
+
+form.addEventListener("click", (e) => {
+  if (e.target.name === "type") {
+    const categoryType =
+      e.target.id === incomeBtn.id
+        ? "income"
+        : e.target.id === expenseBtn.id
+          ? "expense"
+          : null;
+    if (categoryType) {
+      populateCategoryList(categories[categoryType]);
+      category.disabled = false;
+    }
+  }
+});
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -276,8 +279,8 @@ function validateId(id) {
   return uuidRegex.test(id);
 }
 
-function validateCategory(category) {
-  return categories.includes(category);
+function validateCategory(category, typeKey) {
+  return categories[typeKey].includes(category);
 }
 
 function validateStoredData(data) {
@@ -286,7 +289,7 @@ function validateStoredData(data) {
     checkNumberValidity(data.amount) &&
     checkNameValidity(data.name) &&
     checkTypeValidity(data.type) &&
-    validateCategory(data.category)
+    validateCategory(data.category, data.type)
   );
 }
 
